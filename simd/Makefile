@@ -16,6 +16,12 @@ iutavx2 : sleefsimddp.c sleefsimdsp.c helperavx2.h iut.c
 iutfma4 : sleefsimddp.c sleefsimdsp.c helperfma4.h iut.c
 	$(CC) $(OPT) -DENABLE_FMA4 -mavx -mfma4 iut.c sleefsimddp.c sleefsimdsp.c -o iutfma4 -lm
 
+libsleef_avx2: sleefsimddp.c sleefsimdsp.c helperavx2.h
+	$(CC) $(OPT) -fPIC -DADD_UNDERSCORES -DENABLE_AVX2 -mavx2 -mfma  sleefsimddp.c sleefsimdsp.c  -lm -shared -o libsleef_avx2.so
+
+libsleef_avx: sleefsimddp.c sleefsimdsp.c helperavx.h
+	$(CC) $(OPT) -fPIC -DADD_UNDERSCORES -DENABLE_AVX -mavx -mfma  sleefsimddp.c sleefsimdsp.c  -lm -shared -o libsleef_avx.so
+
 ../tester/tester :
 	cd ../tester; make tester
 
